@@ -39,7 +39,7 @@ jobs:
         uses: docker/build-push-action@v5
         with:
           build-args: |
-            QBT_VERSION=devel
+            QBT_VERSION=run-on-removal
           cache-from: type=gha
           cache-to: type=gha,mode=max
           labels: |

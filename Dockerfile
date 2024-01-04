@@ -85,6 +85,13 @@ RUN \
       --recurse-submodules \
       https://github.com/qbittorrent/qBittorrent.git && \
     cd qBittorrent ; \
+  elif [ "${QBT_VERSION}" = "run-on-removal" ]; then \
+    git clone \
+      --depth 1 \
+      --recurse-submodules \
+      --branch run-on-removal \
+      https://github.com/DES2048/qBittorrent-run-on-removal.git && \
+    cd qBittorrent-run-on-removal ; \
   else \
     wget "https://github.com/qbittorrent/qBittorrent/archive/refs/tags/release-${QBT_VERSION}.tar.gz" && \
     tar -xf "release-${QBT_VERSION}.tar.gz" && \
@@ -117,6 +124,10 @@ RUN \
   if [ "${QBT_VERSION}" = "devel" ]; then \
     cd qBittorrent && \
     echo "qBittorrent git $(git rev-parse HEAD)" >> /sbom.txt && \
+    cd .. ; \
+  elif [ "${QBT_VERSION}" = "run-on-removal" ]; then \
+    #cd qBittorrent && \
+    echo "qBittorrent-run-on-removal" >> /sbom.txt && \
     cd .. ; \
   else \
     echo "qBittorrent ${QBT_VERSION}" >> /sbom.txt ; \
